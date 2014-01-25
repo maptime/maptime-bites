@@ -1,4 +1,4 @@
 maptime-bites
 =============
 
-Code snippets for 
+Code snippets for embedding on pages.
