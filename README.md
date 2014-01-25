@@ -1,4 +1,4 @@
-maptime-bites
-=============
+bites
+=====
 
-Code snippets for embedding on pages.
+Standalone map examples intended for iframes used in blog posts
