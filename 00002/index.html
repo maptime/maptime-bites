@@ -20,7 +20,7 @@ var map = L.mapbox.map('map', 'grafa.hf3lmhlf')
     .setView([45.52245801087795, -122.67773866653444], 13);
     
 // Adding credits
-var attrib = L.control.attribution().addTo(map);	
+var attrib = L.control.attribution({prefix: false, position:'bottomleft'}).addTo(map);	
 attrib.addAttribution('Credits: Metro RLIS, City of Portland, DOGAMI, © Mapbox © OpenStreetMap');
 
 // Adding layers
