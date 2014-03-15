@@ -43,16 +43,17 @@ var CLIENT_SECRET = '15B0I2GMNNWM0KYWIBMLBKA2HND3RQEBHRXPGKSAFOQQZTJH';
 
 // https://developer.foursquare.com/start/search
 // or use category tree to find venue category IDs https://developer.foursquare.com/categorytree
-var coffee = '4bf58dd8d48988d1e0931735';
-var breakfast = '4bf58dd8d48988d143941735';
+var coffee = '4bf58dd8d48988d1e0931735',
+    breakfast = '4bf58dd8d48988d143941735',
+    cafe = '4bf58dd8d48988d16d941735';
 
 var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
   '?client_id=CLIENT_ID' +
   '&client_secret=CLIENT_SECRET' +
-  '&v=20130815' +
+  '&v=20140315' +
   '&ll=LATLON' +
-  '&categoryId=' + coffee + ',' + breakfast +
-  '&limit=100' +
+  '&categoryId=' + coffee + ',' + breakfast +',' + cafe +
+  '&limit=50' + // 50 is the limit :(
   '&radius=5000' +
   '&callback=?';
 
