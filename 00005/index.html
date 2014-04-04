@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Live Collaborative Editing with Firebase</title>
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #geolocate {
+        background: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 158px;
+        margin-left: -80px;
+        z-index: 1000;
+        font: 13px/18px;
+        text-align: center;
+        padding: 10px 0;
+        color: #3C4E5A;
+        display: block;
+        border: 1px solid #BBB;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    #geolocate:hover {
+        background: #ECF5FA;
+    }
+    .leaflet-label img {width: 50px;}
+    .leaflet-popup-content img {width: 150px;}
+    .label-remove {background-color: #f30;}
+    img.center {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       width: 50px;
+       height: 50px;
+       margin-top: -25px; /* Half the height */
+       margin-left: -25px; /* Half the width */
+    }
+</style>
+</head>
+<body>
+
+<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+<div id='map'></div>
+<a href='#' id='geolocate'>Find me</a>
+<img src="https://i.cloudup.com/kRCncNvQlE-3000x3000.png" class="center" />
+<script>
+
+// Connect to the example firebase. This is a free account, and so it
+// will fail if given more than 50 concurrent users. Create an account at
+// http://firebaseio.com/ and use your own database if you want to try out
+// this example.
+var base = new Firebase('https://grafa-features.firebaseio.com/'),
+// generate a random color for the marker, just for fun.
+    // color = '#' + [
+    //     (~~(Math.random() * 16)).toString(16),
+    //     (~~(Math.random() * 16)).toString(16),
+    //     (~~(Math.random() * 16)).toString(16)].join('');
+    colorRemove = '#f30';
+    colorGood = '#bada55';
+    map = L.mapbox.map('map', 'grafa.h2e9ii5l');
+    geolocate = document.getElementById('geolocate');
+
+var tileLayer = L.mapbox.tileLayer('grafa.bfs6pqfr').addTo(map);
+tileLayer.on('ready', function() {
+  // the layer has been fully loaded now, and you can
+  // call .getTileJSON and investigate its properties
+  // var legend = map.legendControl.addLegend(tileLayer.getTileJSON().legend);
+});
+
+// This uses the HTML5 geolocation API, which is available on
+// most mobile browsers and modern browsers, but not in Internet Explorer
+//
+// See this chart of compatibility for details:
+// http://caniuse.com/#feat=geolocation
+
+if (!navigator.geolocation) {
+    geolocate.innerHTML = 'geolocation is not available';
+} else {
+    geolocate.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        map.locate();
+    };
+}
+
+
+
+// Create the marker that the user drags to add their message to the map
+var myIcon = L.icon({
+    iconUrl: 'https://i.cloudup.com/kRCncNvQlE-3000x3000.png',
+    iconSize: [48,48],
+    popupAnchor: [1, -16],
+});
+
+var marker = L.marker([0, 0], {
+    draggable: false,
+    icon: myIcon,
+    opacity: 0
+    // Add a form to that marker that lets them specify a message and click Add
+    // to add the data.
+})
+    .bindPopup(
+        '<table>' + 
+          '<tr>' +
+            '<td><strong>Address: </strong></td>' +
+            '<td><input type="text" id="address" placeholder="enter address" required width=70px  /></td>' +
+          '</tr>' +
+          '<tr>' +
+            '<td><strong>Comments: </strong></td>' +
+            '<td><input type="text" id="message" placeholder="comments" required width=70px  /></td>' +
+          '</tr>' +
+          '<tr>' +
+            '<td><strong>Status: </strong></td>' +
+            '<td><select required name="select" id="bldg">' + 
+                  '<option value="improve">Improve</option>' +
+                  '<option value="good" selected>Good</option>' +
+                  '<option value="error">Error</option>' +
+                  '<option value="remove">Remove</option>' +
+            '</td></select><br>' +
+          '</tr>' +
+        '</table>' +
+        '<button id="add-button">Add</button>');
+
+// every time the marker is dragged, update the form
+map.on('dragend', function(e) {
+    marker.setLatLng(map.getCenter());
+    marker.openPopup();
+    // When the user clicks Add
+    L.DomEvent.addListener(L.DomUtil.get('add-button'), 'click', function() {
+        // First, clean the potential-HTML they've added to the value.
+        var message = L.DomUtil.get('message').value;
+        var bldgcond = L.DomUtil.get('bldg').value;
+        var address = L.DomUtil.get('address').value;
+        // Get the current draggable marker's position and GeoJSON representation
+        var geojson = marker.toGeoJSON();
+        if (bldgcond == 'remove') {
+            geojson.properties['marker-color'] = colorRemove;
+        } else{
+            geojson.properties['marker-color'] = colorGood;
+        };
+        
+        // geojson.properties['marker-symbol'] = 'beer';
+        geojson.properties.title = message;
+        geojson.properties.address = address;
+        geojson.properties.bldgcond = bldgcond;
+        // And save it to Firebase
+        base.push(geojson);
+        marker.closePopup();
+        // map.removeLayer(marker);
+    });
+});
+
+// with a cap of 200, listen for new markers being added to the map
+base.limit(200).on('child_added', function(snapshot) {
+    // And for each new marker, add a featureLayer
+
+    featureLayer = L.mapbox.featureLayer(snapshot.val())
+        .eachLayer(function(l) {
+            var popupContent = '<strong>Address: </strong><br>' + l.feature.properties.address + '<br>' +
+                '<strong>Comments:</strong><br>' + l.feature.properties.title + '<br>' +
+                '<strong>Status: </strong>' + l.feature.properties.bldgcond;
+            // and bind it to the marker
+            l.bindPopup(popupContent);
+            // Which positions markers below the marker you drag, so that
+            // they don't overlap in the z-index
+            l.setZIndexOffset(-1000)
+        })
+        .addTo(map);
+});
+
+
+// Use this for geolocation
+// =============================
+// Once we've got a position, zoom and center the map
+// on it, and add a single marker.
+map.on('locationfound', function(e) {
+    var myCoords = [e.latlng.lat,e.latlng.lng];
+    map.fitBounds(e.bounds);
+
+    // And hide the geolocation button
+    geolocate.parentNode.removeChild(geolocate);
+    marker.addTo(map);
+    // marker.setLatLng(myCoords);
+});
+
+// If the user chooses not to allow their location
+// to be shared, display an error message.
+map.on('locationerror', function() {
+    geolocate.innerHTML = 'position could not be found';
+});
+</script>
+
+</body>
+</html>
