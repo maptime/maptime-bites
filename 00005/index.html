@@ -133,7 +133,7 @@ var marker = L.marker([0, 0], {
         '<button id="add-button">Add</button>');
 
 // every time the marker is dragged, update the form
-map.on('dragend', function(e) {
+map.on('click', function(e) {
     marker.setLatLng(map.getCenter());
     marker.openPopup();
     // When the user clicks Add
