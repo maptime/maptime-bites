@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Quakes</title>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.ie.css' rel='stylesheet'>
+  <![endif]-->
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<script src="green.js"></script>
+<script type='text/javascript'>
+var map = L.mapbox.map('map','grafa.hm8bb03o').setView([-19.6298, -70.8634], 6);
+
+var marker = L.circleMarker([-19.6298, -70.8634], {fillColor: 'red', stroke: false})
+    .addTo(map);
+
+function resizer() {
+	var grow = Math.floor(Math.random()*60);
+	marker.setRadius(grow);
+};
+
+setInterval(function () {resizer()}, 50);
+
+</script>
+</body>
+</html>
