@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title></title>
+<title>Embed iframes</title>
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
@@ -26,10 +26,6 @@ var map = L.mapbox.map('map', 'grafa.h2e9ii5l')
 // use sanitizer for iframes
 var featureLayer = L.mapbox.featureLayer('grafa.hmecie6k',{sanitizer: function(x) {return x}})
     .addTo(map);
-
-var newfeatureLayer = L.mapbox.featureLayer('examples.map-zr0njcqy')
-    .addTo(map);
-
 
 </script>
 </body>
