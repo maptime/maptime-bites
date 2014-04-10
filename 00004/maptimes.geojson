@@ -90,6 +90,21 @@
           37.805986463750315
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeME",
+        "twitter": "maptimeme",
+        "contact": "Jacques Tardie | @jqtrde"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.25653839111327,
+          43.66042082657193
+        ]
+      }
     }
   ]
 }
