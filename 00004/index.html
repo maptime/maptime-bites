@@ -17,11 +17,14 @@
 <div id='map'></div>
 <script type='text/javascript'>
 
-var map = L.mapbox.map('map', 'grafa.h2e9ii5l')
-    .setView([42.29,-98.78], 3);
+var map = L.mapbox.map('map');
+var stamenLayer = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
+		.addTo(map);
 
 var featureLayer = L.mapbox.featureLayer()
     .addTo(map);
+
+map.setView([42.29,-98.78], 3);
 
 featureLayer.loadURL('maptimes.geojson');
 
