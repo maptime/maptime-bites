@@ -105,6 +105,19 @@
           43.66042082657193
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeDC"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.02308654785156,
+          38.90252245678968
+        ]
+      }
     }
   ]
 }
