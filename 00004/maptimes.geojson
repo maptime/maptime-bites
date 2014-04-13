@@ -118,6 +118,19 @@
           38.90252245678968
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeAustin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.7372932434082,
+          30.297166099436673
+        ]
+      }
     }
   ]
 }
