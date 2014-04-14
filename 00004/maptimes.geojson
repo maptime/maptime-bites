@@ -49,6 +49,21 @@
     {
       "type": "Feature",
       "properties": {
+        "title": "MaptimeATL",
+        "twitter": "MaptimeATL",
+        "contact": "Landon Reed | @eltiar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.384744,
+          33.755152
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "title": "MaptimeNYC",
         "twitter": "MaptimeNYC",
         "contact": "Alyssa Wright | @alyssapwright Chris Henrick | @chrislhenrick Eric Brelsford | @ebrelsford"
