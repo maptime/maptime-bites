@@ -175,6 +175,21 @@
           41.87579225678032
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeSLC",
+        "twitter": "MaptimeSLC",
+        "contact": "Martijn van Exel @mvexel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.89109563827515,
+          40.76936991525655
+        ]
+      }
     }
   ]
 }
