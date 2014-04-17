@@ -147,6 +147,20 @@
           30.297166099436673
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeTO",
+        "contact": "Courtney Claessens | @sidewalkballet Tristen Brown | @fallsemo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.38456773757935,
+          43.65230152428721
+        ]
+      }
     }
   ]
 }
