@@ -195,7 +195,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeNullIsland",
-        "twitter": "MaptimeNullIsland"
+        "twitter": "MaptimeNull"
       },
       "geometry": {
         "type": "Point",
