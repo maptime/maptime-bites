@@ -161,6 +161,20 @@
           43.65230152428721
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeChicago",
+        "contact": "Dan Swick | @DanSwick Ian Dees @iandees | Nick Doiron @mapmeld"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.61890649795532,
+          41.87579225678032
+        ]
+      }
     }
   ]
 }
