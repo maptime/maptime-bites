@@ -14,4 +14,4 @@ Standalone map examples intended for iframes used in blog posts. To add a bite t
   </body>
 </html>
 ```
-and get [this](http://bl.ocks.org/geografa/ca9d16aae516265fe883).
+and get [this](http://maptimepdx.org/01-21-2014/sharing-code-samples.html).
