@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 NYC Geo Test</title>
+    </head>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <body>
+        <script type="text/javascript" src="js/d3.v3.min.js"></script>        
+        <script type="text/javascript">
+            /* code reused / modified from the following stackoverflow question:
+            http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object */
+
+            // width and height of svg area
+            var width = 900,
+                height = 900;
+
+            // tell D3 to create an SVG area to draw in and to append it to the html <body> tag.
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("class", "svg");
+
+            // load the geojson data and then do the magic in a callback function...
+            d3.json("data/nyc_coastline.geojson", function(error, data){                
+
+                if (error) {
+                    console.log("error: ", error);
+                    return;
+                }
+
+                // let's check out the data in the conosole
+                // (in the Chrome browser go to menu > view > developer > javascript console)
+                console.log(data);
+
+                // create an initial projection using the D3 Albers CRS.
+                var projection = d3.geo.albers()
+                    .scale(1)
+                    .translate([0,0]);
+
+                // create a path generator.
+                var path = d3.geo.path()
+                    .projection(projection);
+
+                // compute bounds of geojson, then derive the scale and translation.
+                var b = path.bounds(data),
+                    s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+                    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+                //console.log("b: ", b, " s: ", s, " t: ", t);
+
+                // update the projection to use the scale and translation....
+                projection
+                    .scale(s)
+                    .translate(t);
+
+                // calculate and draw a bounding box for the geojson.
+                svg.append("rect")
+                    .attr('width', width)
+                    .attr('height', height)
+                    .style('stroke', 'black')
+                    .style('fill', 'orange');
+
+                // draw the svg of both the geojson and bounding box.
+                svg.selectAll("path").data(data.features).enter().append("path")
+                    .attr("d", path)
+                    .style("fill", "red")
+                    .style("stroke-width", "0.5")
+                    .style("stroke", "blue")
+
+            }); // all done!
+
+        </script>
+    </body>
+</html>
