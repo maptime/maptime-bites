@@ -5,4 +5,4 @@ One of the problems of working with geospatial data a la cart in D3 is appropria
 
 In this example we'll load a coastline extract from OpenStreetMap of the New York City metro area that has already been converted to a GeoJSON format and projected to a WGS84 coordinate reference system. We'll project this data to D3's Albers projection, then scale and translate it using a bounding box and some math so that it fits well on the web page. From here we can console.log the parameters of the scale and translation so that we can fine tune them a bit further if needed.
 
-The example in the index.html file within this repo uses code borrowwed from a post on [Stack Overflow](http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object).
+The example in the index.html file within this repo uses code borrowed from a post on [Stack Overflow](http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object).
