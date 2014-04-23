@@ -26,7 +26,7 @@
                 .attr("height", height)
                 .attr("class", "svg");
 
-            // load the geojson data and then do the magic in a callback function...
+            // load the geojson data and then do all the magic in a callback function...
             d3.json("data/nyc_coastline.geojson", function(error, data){                
 
                 if (error) {
@@ -52,9 +52,10 @@
                     s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
                     t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
 
-                //console.log("b: ", b, " s: ", s, " t: ", t);
+                // console.log the above properties to see what their values are.
+                console.log("bounds: ", b, "scale: ", s, " translate: ", t);
 
-                // update the projection to use the scale and translation....
+                // update the projection to use the values from the above scale and translation.
                 projection
                     .scale(s)
                     .translate(t);
