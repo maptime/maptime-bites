@@ -15,3 +15,7 @@ Standalone map examples intended for iframes used in blog posts. To add a bite t
 </html>
 ```
 and get [this](http://maptimepdx.org/01-21-2014/sharing-code-samples.html).
+
+## Descriptions of Bites
+* [00001](http://maptime.github.io/maptime-bites/00001/): basic Map using Leaflet and MapBox JS.
+* 
