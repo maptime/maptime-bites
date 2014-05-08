@@ -152,7 +152,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeTO",
-        "contact": "Courtney Claessens | @sidewalkballet Tristen Brown | @fallsemo"
+        "contact": "Courtney Claessens | @sidewalkballet Tristen Brown | @fallsemo",
+        "twitter": "MaptimeTO"
       },
       "geometry": {
         "type": "Point",
