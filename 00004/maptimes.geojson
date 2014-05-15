@@ -125,7 +125,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeDC",
-        "twitter": "MaptimeDC"
+        "twitter": "MaptimeDC",
+        "contact": "Brandon Knight | @geobrando Rosemary Wardley | @rosemarydaley"
       },
       "geometry": {
         "type": "Point",
