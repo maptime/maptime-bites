@@ -220,6 +220,21 @@
           35.04667
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Maptime WindsorEssex",
+        "twitter": "maptimeWindsor",
+        "contact": "Mita Williams | @copystar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.03483963012695,
+          42.31149743167054
+        ]
+      }
     }
   ]
 }
