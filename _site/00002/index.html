@@ -16,9 +16,9 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.mapbox.map('map', 'grafa.bfs6pqfr')
+var map = L.mapbox.map('map', 'grafa.bfs6pqfr', {legendControl: false})
     .setView([45.52245801087795, -122.67773866653444], 13);
-    
+
 // Adding credits
 var attrib = L.control.attribution({prefix: false, position:'bottomleft'}).addTo(map);	
 attrib.addAttribution('Credits: Metro RLIS, City of Portland, DOGAMI, © Mapbox © OpenStreetMap');

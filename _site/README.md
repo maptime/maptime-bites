@@ -14,4 +14,14 @@ Standalone map examples intended for iframes used in blog posts. To add a bite t
   </body>
 </html>
 ```
-and get [this](http://bl.ocks.org/geografa/9149592).
+and get [this](http://maptimepdx.org/01-21-2014/sharing-code-samples.html).
+
+## Descriptions of Bites
+* [00001](http://maptime.github.io/maptime-bites/00001/): Basic map using Leaflet and MapBox JS.
+* [00002](http://maptime.github.io/maptime-bites/00002/): Basic map (Leaflet and Mapbox JS) with gridlayers and gridcontrols.
+* [00003](http://maptime.github.io/maptime-bites/00003/): Adding places using the FourSquare API. 
+* [00004](http://maptime.github.io/maptime-bites/00004/): How to add yo' chapter to Maptime's official map.
+* [00005](http://maptime.github.io/maptime-bites/00005/): Using [Firebase.com](https://www.firebase.com/) / MapBox Tool.
+* [00006](http://maptime.github.io/maptime-bites/00006/): Embedding iFrame code in Tooltips.
+* [00007](http://maptime.github.io/maptime-bites/00007/): Blinking circle marker.
+* [00008](http://maptime.github.io/maptime-bites/00008/): Loading custom GeoJSON with D3 JS.
