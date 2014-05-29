@@ -16,7 +16,7 @@
 <script type='text/javascript'>
 
 var map = L.mapbox.map('map', null, {touchZoom: false, scrollWheelZoom: false});
-var stamenLayer = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
+var stamenLayer = L.tileLayer('http://{s}.sm.mapstack.stamen.com/(toner-lite,(watercolor,$fff%5B@0%5D,$fff%5Bhsl-saturation@50%5D,mapbox-water%5Bdestination-in%5D)%5B@50%5D/{z}/{x}/{y}.png')
 		.addTo(map);
 
 var featureLayer = L.mapbox.featureLayer()
@@ -38,7 +38,7 @@ featureLayer.on('ready', function(){
 
       marker.setIcon(new L.Icon({
             iconUrl:'maptime-marker.png',
-            iconSize: [30,30],
+            iconSize: [32,37],
             iconAnchor: [15,0]
         }));
     });
