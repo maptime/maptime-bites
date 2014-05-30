@@ -9,6 +9,12 @@
   <style>
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
+    .leaflet-popup-content {background: #B44176; color: #fff; border-color: #fff; border-radius:12px; margin: 6px;}
+    .leaflet-popup-content-wrapper {border-radius: 12px; background: #B44176; color: #fff;}
+    .leaflet-popup-content a {color: #bada55;}
+    .leaflet-popup-content h2 {font-size:32px;}
+    .leaflet-popup-content a:hover {color: #d8fc62;}
+    .leaflet-popup-tip {border-top: 10px solid #B44176;}
   </style>
 </head>
 <body>
@@ -31,15 +37,17 @@ featureLayer.on('ready', function(){
     featureLayer.eachLayer(function(marker){
       
       // give it a title and then call the description from the properties
-      var popupContent = '<strong>'+ marker.feature.properties.title +'</strong><br>' +
-          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '">@' + marker.feature.properties.twitter +'</a>';
+      var popupContent = '<h2>'+ marker.feature.properties.title +'</h2>' +
+          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '" target="_blank">@' + marker.feature.properties.twitter +'</a>';
       // and bind it to the marker
       marker.bindPopup(popupContent);
 
       marker.setIcon(new L.Icon({
             iconUrl:'maptime-marker.png',
-            iconSize: [32,37],
-            iconAnchor: [15,0]
+            iconSize: [24,24],
+            iconAnchor: [6,12],
+            popupAnchor: [5,-10]
+
         }));
     });
 });
