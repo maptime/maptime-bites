@@ -1,7 +1,7 @@
 Maptime Bites
 =====
 
-Standalone map examples intended for iframes used in blog posts. To add a bite to your site, just add the absolute URL to your iframe code:
+Standalone map examples intended for iframes used in blog posts. To add a bite to your site, add the absolute URL to your iframe code:
 ```
 <!DOCTYPE html>
 <html>
