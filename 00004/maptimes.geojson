@@ -138,7 +138,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeAustin"
+        "title": "MaptimeATX",
+        "twitter": "MaptimeATX",
+        "contact": "James Seppi | @hydrologee"
       },
       "geometry": {
         "type": "Point",
