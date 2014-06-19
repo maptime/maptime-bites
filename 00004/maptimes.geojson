@@ -235,6 +235,21 @@
           42.31149743167054
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeBoston",
+        "twitter": "maptimeBoston",
+        "contact": "Jake Wasserman | @jwass2000 Andy Woodruff | @awoodruff Mike Foster | @mjfoster83"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.070556640625,
+          42.35854391749705
+        ]
+      }
     }
   ]
 }
