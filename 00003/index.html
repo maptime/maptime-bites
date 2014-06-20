@@ -20,6 +20,7 @@ var southWest = L.latLng(45.487335,-122.771187),
     bounds = L.latLngBounds(southWest, northEast);
 
 var map = L.mapbox.map('map', 'grafa.h2e9ii5l', {
+        infoControl: false,
         attributionControl: true,
         minZoom:14
     })
