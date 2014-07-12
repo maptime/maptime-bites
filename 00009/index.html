@@ -18,7 +18,7 @@
   <style>
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
-    .leaflet-container h1 {font-size: 20px; font}
+    .leaflet-container h1 {font-size: 40px; line-height: 34px;  }
   </style>
 </head>
 <body>
@@ -54,8 +54,8 @@ geoFire.get("coords").then(function(location) {
     map.panTo(location);
     var myIcon = L.icon({
         iconUrl: 'https://i.cloudup.com/LYJ78rgOtL-3000x3000.jpeg',
-        iconSize: [50,50],
-        popupAnchor: [0, -16]
+        iconSize: [102,102],
+        popupAnchor: [0, -56]
     });
 
     var marker = L.marker(location).addTo(map);
