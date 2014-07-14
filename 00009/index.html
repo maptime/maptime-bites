@@ -13,16 +13,62 @@
 <script src="https://cdn.firebase.com/libs/geofire/2.1.0/geofire.min.js"></script>
 
 <!-- Mapbox -->
-<script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+<script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
   <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-    .leaflet-container h1 {font-size: 40px; line-height: 34px;  }
+    body {
+      background:#404040;
+      color:#f8f8f8;
+      font:500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+      margin:0;
+      padding:0;
+      -webkit-font-smoothing:antialiased;
+    }
+    .sidebar {
+      width:33.3333%;
+      }
+    .map {
+      border-left:1px solid #fff;
+      position:absolute;
+      left:33.3333%;
+      width:66.6666%;
+      top:0;
+      bottom:0;
+      }
+    .pad2 {
+      padding:20px;
+      -webkit-box-sizing:border-box;
+         -moz-box-sizing:border-box;
+              box-sizing:border-box;
+      }
+    .leaflet-container h1 {font-size: 40px; line-height: 34px;}
+    #fishControls > * {
+      display: inline;
+    }
   </style>
 </head>
 <body>
-<div id='map'></div>
+<div class='sidebar pad2'>
+   <!-- Fish controls -->
+    <div id="fishControls">
+      <p>Get location of</p>
+
+      <select id="fishSelect">
+        <option value="fish0">Fish 0</option>
+        <option value="fish1">Fish 1</option>
+        <option value="fish2">Fish 2</option>
+        <option value="fish3">Fish 3</option>
+      </select>
+
+      <input id="getFishLocation" type="button" value="Get Location" />
+    </div>
+
+    <!-- Message log -->
+    <div id="log"></div>
+
+</div>
+<div id='map' class='map pad2'>Map</div>
+
 <script type='text/javascript'>
 
 // Create a Firebase reference where GeoFire will store its information
@@ -33,38 +79,142 @@ var geoFire = new GeoFire(firebaseRef);
 
 var ref = geoFire.ref();  // ref === firebaseRef
 
-var map = L.mapbox.map('map', 'grafa.iokabaak');
+// Specify the locations for each fish
 
-map.on('click', function(e) {
-  var coords = e.latlng.lat + ','+e.latlng.lng;
+var map = L.mapbox.map('map', 'grafa.iokabaak')
+    .setView([45.52245801087795, -122.67773866653444],13);
 
-  geoFire.set("coords", [e.latlng.lat,e.latlng.lng]).then(function() {
-    location.reload(true);
-  }, function(error) {
-    // console.log("Error: " + error);
+var fishLocations = [
+  [45.557831002192586,-122.66640989575534], // me
+  [45.51306856874444,-122.63739103451373]  // julie
+];
+
+
+// Set the initial locations of the fish in GeoFire
+log("*** Setting initial locations ***");
+var promises = fishLocations.map(function(location, index) {
+  return geoFire.set("fish" + index, location).then(function() {
+    log("fish" + index + " initially set to [" + location + "]");
   });
-  
 });
 
-geoFire.get("coords").then(function(location) {
-  if (location === null) {
-    console.log("Provided key is not in GeoFire");
-  }
-  else {
-    map.panTo(location);
-    var myIcon = L.icon({
-        iconUrl: 'https://i.cloudup.com/LYJ78rgOtL-3000x3000.jpeg',
-        iconSize: [102,102],
-        popupAnchor: [0, -56]
+  // Once all the fish are in GeoFire, update some of their positions
+  var newLocation;
+  RSVP.allSettled(promises).then(function() {
+    log("*** Updating locations ***");
+
+    map.on('click', function(e) {
+      return geoFire.set("fish0", [e.latlng.lat,e.latlng.lng])
     });
 
-    var marker = L.marker(location).addTo(map);
-    marker.setIcon(myIcon);
-    marker.bindPopup("<h1>Hey! I'm over here! Click or tap the map and let me know where you're at. k?<h1>").openPopup();
+  }).then(function() {
+    log("fish1 is at [" + fishLocations[1] + "]");  
+
+    // if (fishLocations === null) {
+    //   console.log("Provided key is not in GeoFire");
+    // }
+    // else {
+    //   log("fish1 is at [" + fishLocations[1] + "]");  
+    // }
+
+    map.on('click', function(e) {
+      return geoFire.set("fish1", [e.latlng.lat,e.latlng.lng])
+    });
+
+  }).then(function() {
+    log("fish2 is at [" + fishLocations[2] + "]");
+
+  //   return geoFire.remove("fish0");
+  // }).then(function() {
+  //   log("fish0 removed from GeoFire");
+
+  //   return geoFire.remove("fish2");
+  // }).then(function() {
+  //   log("fish3 removed from GeoFire");
+
+    log("*** Use the controls above to retrieve a fish's location ***");
+  }).catch(function(error) {
+    // Error case
+    log(error);
+  });
+
+  // Log the location of the selected fish every time the get fish location button is clicked
+  document.getElementById("getFishLocation").addEventListener("click", function() {
+    var selectedFishKey = document.getElementById("fishSelect").value;
+
+    geoFire.get(selectedFishKey).then(function(location) {
+      if (location === null) {
+        log( selectedFishKey + " is not in GeoFire");
+      }
+      else {
+        log(selectedFishKey + " is at location [" + location + "]");
+            map.panTo(location);
+            var myIcon = L.icon({
+                iconUrl: 'https://i.cloudup.com/LYJ78rgOtL-3000x3000.jpeg',
+                iconSize: [102,102],
+                popupAnchor: [0, -56]
+            });
+
+            var marker = L.marker(location).addTo(map);
+            marker.setIcon(myIcon);
+            marker.bindPopup("<h1>Hey! I'm over here! Click or tap the map and let me know where you're at. k?<h1>").openPopup();
+      }
+    });
+  });
+
+
+  /*************/
+  /*  HELPERS  */
+  /*************/
+  /* Returns a random string of the inputted length */
+  function generateRandomString(length) {
+      var text = "";
+      var validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for(var i = 0; i < length; i++) {
+          text += validChars.charAt(Math.floor(Math.random() * validChars.length));
+      }
+
+      return text;
   }
-}, function(error) {
-  console.log("Error: " + error);
-});
+
+  /* Logs to the page instead of the console */
+  function log(message) {
+    var childDiv = document.createElement("div");
+    var textNode = document.createTextNode(message);
+    childDiv.appendChild(textNode);
+    document.getElementById("log").appendChild(childDiv);
+  };
+
+
+// map.on('click', function(e) {
+//   var coords = e.latlng.lat + ','+e.latlng.lng;
+//   geoFire.set("myPos", [e.latlng.lat,e.latlng.lng]).then(function() {
+//     var marker = L.marker(coords).addTo(map);
+//   }, function(error) {
+//     // console.log("Error: " + error);
+//   });
+// });
+
+// geoFire.get("myPos").then(function(location) {
+//   if (location === null) {
+//     console.log("Provided key is not in GeoFire");
+//   }
+//   else {
+//     map.panTo(location);
+//     var myIcon = L.icon({
+//         iconUrl: 'https://i.cloudup.com/LYJ78rgOtL-3000x3000.jpeg',
+//         iconSize: [102,102],
+//         popupAnchor: [0, -56]
+//     });
+
+//     var marker = L.marker(location).addTo(map);
+//     marker.setIcon(myIcon);
+//     marker.bindPopup("<h1>Hey! I'm over here! Click or tap the map and let me know where you're at. k?<h1>").openPopup();
+//   }
+// }, function(error) {
+//   console.log("Error: " + error);
+// });
 
 </script>
 </body>
