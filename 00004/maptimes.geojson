@@ -125,8 +125,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeDC",
-        "twitter": "MaptimeDC",
-        "contact": "Brandon Knight | @geobrando Rosemary Wardley | @rosemarydaley"
+        "twitter": "MaptimeDC"
       },
       "geometry": {
         "type": "Point",
@@ -139,7 +138,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeAustin"
+        "title": "MaptimeATX",
+        "twitter": "MaptimeATX",
+        "contact": "James Seppi | @hydrologee"
       },
       "geometry": {
         "type": "Point",
@@ -204,6 +205,51 @@
         "coordinates": [
           0,
           0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeCHA",
+        "twitter": "maptimeCHA",
+        "contact": "Jason Denizac | @_jden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.31158447265624,
+          35.04667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Maptime WindsorEssex",
+        "twitter": "maptimeWindsor",
+        "contact": "Mita Williams | @copystar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.03483963012695,
+          42.31149743167054
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeBoston",
+        "twitter": "maptimeBoston",
+        "contact": "Jake Wasserman | @jwass2000 Andy Woodruff | @awoodruff Mike Foster | @mjfoster83"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.070556640625,
+          42.35854391749705
         ]
       }
     }

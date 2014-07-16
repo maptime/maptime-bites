@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title></title>
+<!-- RSVP -->
+<script src="./js/rsvp.js"></script>
+
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+
+<!-- GeoFire -->
+<script src="https://cdn.firebase.com/libs/geofire/2.1.0/geofire.min.js"></script>
+
+<!-- Mapbox -->
+<script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    .leaflet-container h1 {font-size: 40px; line-height: 34px;  }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+
+// Create a Firebase reference where GeoFire will store its information
+var firebaseRef = new Firebase("https://grafa.firebaseio.com/");
+
+// Create a GeoFire index
+var geoFire = new GeoFire(firebaseRef);
+
+var ref = geoFire.ref();  // ref === firebaseRef
+
+var map = L.mapbox.map('map', 'grafa.iokabaak');
+
+map.on('click', function(e) {
+  var coords = e.latlng.lat + ','+e.latlng.lng;
+
+  geoFire.set("coords", [e.latlng.lat,e.latlng.lng]).then(function() {
+    location.reload(true);
+  }, function(error) {
+    // console.log("Error: " + error);
+  });
+  
+});
+
+geoFire.get("coords").then(function(location) {
+  if (location === null) {
+    console.log("Provided key is not in GeoFire");
+  }
+  else {
+    map.panTo(location);
+    var myIcon = L.icon({
+        iconUrl: 'https://i.cloudup.com/LYJ78rgOtL-3000x3000.jpeg',
+        iconSize: [102,102],
+        popupAnchor: [0, -56]
+    });
+
+    var marker = L.marker(location).addTo(map);
+    marker.setIcon(myIcon);
+    marker.bindPopup("<h1>Hey! I'm over here! Click or tap the map and let me know where you're at. k?<h1>").openPopup();
+  }
+}, function(error) {
+  console.log("Error: " + error);
+});
+
+</script>
+</body>
+</html>

@@ -3,47 +3,60 @@
 <head>
 <meta charset=utf-8 />
 <title>Maptimes Wordwide</title>
-  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
-  <!--[if lte IE 8]>
-    <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.ie.css' rel='stylesheet'>
-  <![endif]-->
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+  
   <style>
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
+    .leaflet-popup-content {background: #B44176; color: #fff; border-color: #fff; border-radius:12px; margin: 6px;}
+    .leaflet-popup-content-wrapper {border-radius: 12px; background: #B44176; color: #fff;}
+    .leaflet-popup-content a {color: #bada55;}
+    .leaflet-popup-content h2 {font-size:32px;}
+    .leaflet-popup-content a:hover {color: #d8fc62;}
+    .leaflet-popup-tip {border-top: 10px solid #B44176;}
+
+    .marker-cluster-small {background-color: rgba(180, 65, 118, 0.6);}
+    .marker-cluster-small div {background-color: rgba(180, 65, 118, 0.6);}
+
   </style>
 </head>
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
 
-var map = L.mapbox.map('map', '', {touchZoom: false, scrollWheelZoom: false});
-var stamenLayer = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg')
+var map = L.mapbox.map('map', null, {touchZoom: false, scrollWheelZoom: false});
+var stamenLayer = L.tileLayer('http://{s}.sm.mapstack.stamen.com/(toner-lite,(watercolor,$fff%5B@0%5D,$fff%5Bhsl-saturation@50%5D,mapbox-water%5Bdestination-in%5D)%5B@50%5D/{z}/{x}/{y}.png')
 		.addTo(map);
 
-var featureLayer = L.mapbox.featureLayer()
-    .addTo(map);
+var featureLayer = L.mapbox.featureLayer();
+    // .addTo(map);
 
 map.setView([42.29,-98.78], 3);
 
 featureLayer.loadURL('maptimes.geojson');
 
-// function to run once marker has loaded
-featureLayer.on('ready', function(){  
-    featureLayer.eachLayer(function(marker){
-      
-      // give it a title and then call the description from the properties
-      var popupContent = '<strong>'+ marker.feature.properties.title +'</strong><br>' +
-          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '">@' + marker.feature.properties.twitter +'</a>';
-      // and bind it to the marker
-      marker.bindPopup(popupContent);
-
-      marker.setIcon(new L.Icon({
-            iconUrl:'maptime-marker.png',
-            iconSize: [30,30],
-            iconAnchor: [15,0]
+featureLayer.on('ready', function(e) {
+    // The clusterGroup gets each marker in the group added to it
+    // once loaded, and then is added to the map
+    var clusterGroup = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 30});
+    e.target.eachLayer(function(marker) {
+        clusterGroup.addLayer(marker);
+        var popupContent = '<h2>'+ marker.feature.properties.title +'</h2>' +
+          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '" target="_blank">@' + marker.feature.properties.twitter +'</a>';
+        // and bind it to the marker
+        marker.bindPopup(popupContent);
+        marker.setIcon(new L.Icon({
+          iconUrl:'maptime-marker.png',
+          iconSize: [24,24],
+          iconAnchor: [6,12],
+          popupAnchor: [5,-10]
         }));
     });
+    map.addLayer(clusterGroup);
 });
 
 </script>
