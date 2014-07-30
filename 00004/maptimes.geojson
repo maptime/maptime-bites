@@ -267,6 +267,21 @@
           38.05403884511629
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeHRVA",
+        "twitter": "maptimehrva",
+        "contact": "Jonah Adkins || @jonahadkins"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.29592895507812,
+          36.84446074079564
+        ]
+      }
     }
   ]
 }
