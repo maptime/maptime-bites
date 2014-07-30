@@ -252,6 +252,21 @@
           42.35854391749705
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "maptimelex",
+        "twitter": "maptimelex",
+        "contact": "Jessi Breen @jessibreen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.50271606445312,
+          38.05403884511629
+        ]
+      }
     }
   ]
 }
