@@ -1,6 +1,6 @@
 ## Map of current maptime locations
 
-## How to add yo' chapter to Maptime's *official* map
+## How to add your chapter to Maptime's *official* map
 
 1. Ask [Alan](https://twitter.com/mappingmashups) (or some other Maptime organizer) to make you an owner on the GitHub organization.
 2. Publicize your membership!  (Go [here](https://github.com/orgs/maptime/members), find you, and click **make public**.)
