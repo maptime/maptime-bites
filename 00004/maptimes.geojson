@@ -342,6 +342,21 @@
           39.968174500886306
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeBER",
+        "twitter": "MaptimeBER",
+        "contact": "MaptimeBER"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.391132354736328,
+          52.52154811647113
+        ]
+      }
     }
   ]
 }
