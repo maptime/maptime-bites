@@ -282,6 +282,66 @@
           36.84446074079564
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeLA",
+        "twitter": "MAPTIMELA",
+        "contact": "MAPTIMELA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.24378967285155,
+          34.07029354225064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeVancouver",
+        "twitter": "MaptimeVAN",
+        "contact": "MaptimeVAN"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.12583923339842,
+          49.28034843646649
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeSTL",
+        "twitter": "maptimestl",
+        "contact": "maptimestl"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.1980972290039,
+          38.633097794118086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimePHL",
+        "twitter": "MaptimePHL",
+        "contact": "MaptimePHL"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.15575408935547,
+          39.968174500886306
+        ]
+      }
     }
   ]
 }
