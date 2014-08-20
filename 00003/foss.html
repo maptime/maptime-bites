@@ -105,6 +105,7 @@ var foursquarePlaces = L.layerGroup().addTo(map);
 // on it, and add a single marker.
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
+    map.setZoom(16);
 
     myLayer.setGeoJSON({
         type: 'Feature',
@@ -136,13 +137,13 @@ map.on('locationfound', function(e) {
         popupAnchor: [0,-12]
       }),
       cafeIcon = L.icon({
-        iconUrl: 'https://i.cloudup.com/t2UIuZZrEQ-3000x3000.png',
-        iconSize: [50,50],
+        iconUrl: 'cafe.png',
+        iconSize: [30,30],
         popupAnchor: [-4,-12]
       });
       beerIcon = L.icon({
-        iconUrl: 'https://i.cloudup.com/jxPvJ-82v8.png',
-        iconSize: [50,50],
+        iconUrl: 'beer.png',
+        iconSize: [30,30],
         popupAnchor: [-4,-12]
       });
       var venue = result.response.venues[i];
