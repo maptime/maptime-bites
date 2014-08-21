@@ -124,7 +124,7 @@ var map = L.mapbox.map('map', 'grafa.ja0500g1', {
         attributionControl: true,
         minZoom:14
     })
-    .setView([45.5221047, -122.6610660], 17)
+    .setView([45.528388564361244,-122.66218185424803], 16)
     .setMaxBounds(bounds);
 
 L.control.locate({
@@ -180,10 +180,10 @@ var foursquarePlaces = L.layerGroup().addTo(map);
 
 // Once we've got a position, zoom and center the map
 // on it, and add a single marker.
-map.on('locationfound', function(e) {
-    map.fitBounds(e.bounds);
-    map.setZoom(17);
-});
+// map.on('locationfound', function(e) {
+//     map.fitBounds(e.bounds);
+//     map.setZoom(17);
+// });
 
 // Credit Foursquare for their wonderful data
 map.attributionControl
