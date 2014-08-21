@@ -45,7 +45,7 @@ var southWest = L.latLng(45.487335,-122.771187),
     northEast = L.latLng(45.572236,-122.552147),
     bounds = L.latLngBounds(southWest, northEast);
 
-var map = L.mapbox.map('map', 'grafa.h2e9ii5l', {
+var map = L.mapbox.map('map', 'grafa.j9jci4aj', {
         infoControl: false,
         attributionControl: true,
         minZoom:14
@@ -94,7 +94,7 @@ var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
   '&ll=LATLON' +
   '&categoryId=' + coffee + ',' + breakfast +',' + cafe +',' + bar +
   '&limit=50' + // 50 is the limit :(
-  '&radius=500' +
+  '&radius=1000' +
   '&callback=?';
 
 // Keep our place markers organized in a nice group.
