@@ -32,15 +32,87 @@
   .leaflet-control-locate.active a {
     background-position:-33px -2px;
   }
+  .ui-button {
+    background:#3887BE;
+    color:#FFF;
+    display:block;
+    position:absolute;
+    top:6%;right:1%;
+    width:160px;
+    margin:-20px 0 0 -80px;
+    z-index:100;
+    text-align:center;
+    padding:10px;
+    border:1px solid rgba(0,0,0,0.4);
+    border-radius:3px;
+  }
+  .ui-button:hover {
+    background:#3074a4;
+    color:#fff;
+  }
 </style>
 </head>
 <body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <div id='map'></div>
+<a href='#' id='geoPlaces' class='ui-button'>Get Places</a>
 
 <script>
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
+var getPlaces = document.getElementById('geoPlaces');
+
+geoPlaces.onclick = function (e) {
+  // Use jQuery to make an AJAX request to Foursquare to load markers data
+  $.getJSON(API_ENDPOINT
+    .replace('CLIENT_ID', CLIENT_ID)
+    .replace('CLIENT_SECRET', CLIENT_SECRET)
+    .replace('LATLON', map.getCenter().lat +
+        ',' + map.getCenter().lng), function(result, status) {
+
+    if (status !== 'success') return alert('Request to Foursquare failed');
+
+    // Transform each venue result into a marker on the map.
+    for (var i = 0; i < result.response.venues.length; i++) {
+
+      var beerIcon = L.divIcon({
+        // specify a class name that we can refer to in styles, as we
+          // do above.
+          className: 'fa-beer',
+          // html here defines what goes in the div created for each marker
+          html: '<i class="fa fa-beer fa-3x"></i>',
+          // and the marker width and height
+          // iconSize: [30, 30],
+          iconAnchor: [20,52]
+      }),
+      cafeIcon = L.divIcon({
+        // specify a class name that we can refer to in styles, as we
+          // do above.
+          className: 'fa-cafe',
+          // html here defines what goes in the div created for each marker
+          html: '<i class="fa fa-coffee fa-3x"></i>',
+          iconAnchor: [24,32]
+      });
+      
+      var venue = result.response.venues[i];
+      var latlng = L.latLng(venue.location.lat, venue.location.lng);
+      var marker = L.marker(latlng)
+        .bindLabel(L.mapbox.sanitize('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
+            venue.name + '</a></h2>'), {
+              noHide: true
+          });
+        
+      if (venue.categories[0].id === '4bf58dd8d48988d143941735' || venue.categories[0].id === '4bf58dd8d48988d1e0931735') { // if the category is 'breakfast' or 'cafe'
+        marker.setIcon(cafeIcon);
+      } else {
+        marker.setIcon(beerIcon); // (category: nightlife)
+      };
+      
+      marker.addTo(foursquarePlaces);
+    }
+  });
+};
+
 
 var southWest = L.latLng(45.487335,-122.771187),
     northEast = L.latLng(45.572236,-122.552147),
@@ -111,55 +183,6 @@ var foursquarePlaces = L.layerGroup().addTo(map);
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
     map.setZoom(17);
-
-    // Use jQuery to make an AJAX request to Foursquare to load markers
-// data.
-  $.getJSON(API_ENDPOINT
-    .replace('CLIENT_ID', CLIENT_ID)
-    .replace('CLIENT_SECRET', CLIENT_SECRET)
-    .replace('LATLON', map.getCenter().lat +
-        ',' + map.getCenter().lng), function(result, status) {
-
-    if (status !== 'success') return alert('Request to Foursquare failed');
-
-    // Transform each venue result into a marker on the map.
-    for (var i = 0; i < result.response.venues.length; i++) {
-
-      var beerIcon = L.divIcon({
-        // specify a class name that we can refer to in styles, as we
-          // do above.
-          className: 'fa-beer',
-          // html here defines what goes in the div created for each marker
-          html: '<i class="fa fa-beer fa-3x"></i>',
-          // and the marker width and height
-          // iconSize: [30, 30],
-          iconAnchor: [20,52]
-      }),
-      cafeIcon = L.divIcon({
-        // specify a class name that we can refer to in styles, as we
-          // do above.
-          className: 'fa-cafe',
-          // html here defines what goes in the div created for each marker
-          html: '<i class="fa fa-coffee fa-3x"></i>',
-          iconAnchor: [24,32]
-      });
-      
-      var venue = result.response.venues[i];
-      var latlng = L.latLng(venue.location.lat, venue.location.lng);
-      var marker = L.marker(latlng)
-        .bindLabel(L.mapbox.sanitize('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
-            venue.name + '</a></h2>'), {
-              noHide: true
-          });
-      if (venue.categories[0].id === '4bf58dd8d48988d143941735' || venue.categories[0].id === '4bf58dd8d48988d1e0931735') { // if the category is 'breakfast' or 'cafe'
-        marker.setIcon(cafeIcon);
-      } else {
-        marker.setIcon(beerIcon); // (category: nightlife)
-      };
-      
-      marker.addTo(foursquarePlaces);
-    }
-  });
 });
 
 // Credit Foursquare for their wonderful data
