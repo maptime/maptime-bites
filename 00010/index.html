@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>FOSS4G Locations from Foursquare</title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+
+<style>
+  body { margin:0; padding:0;}
+  #map { position:absolute; top:0; bottom:0; width:100%; background: #ddd;}
+  
+  /* icons */
+  .fa-beer {color: #7c7136; text-shadow: 2px 2px 4px #000000;} /*text-shadow: 0 0 8px #333;*/
+  .fa-cafe {color: #fff; text-shadow: 0 0 8px #333;}
+  
+  /* leaflet locate */
+  .leaflet-control-locate {
+    border:1px solid rgba(0,0,0,0.4);
+  }
+  .leaflet-control-locate a {
+    background-color:#fff;
+    background-position:-3px, -2px;
+  }
+  .leaflet-control-locate.active a {
+    background-position:-33px -2px;
+  }
+</style>
+</head>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<div id='map'></div>
+
+<script>
+
+L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
+
+var southWest = L.latLng(45.487335,-122.771187),
+    northEast = L.latLng(45.572236,-122.552147),
+    bounds = L.latLngBounds(southWest, northEast);
+
+// grafa.j9jci4aj
+var map = L.mapbox.map('map', 'grafa.ja0500g1', {
+        infoControl: false,
+        attributionControl: true,
+        minZoom:14
+    })
+    .setView([45.5221047, -122.6610660], 17)
+    .setMaxBounds(bounds);
+
+L.control.locate({
+  circleStyle: {
+    color: '#f30',
+            fillColor: '#f30',
+            fillOpacity: 0.3,
+            weight: 2,
+            opacity: 0.6
+  },
+  // inner marker
+  markerStyle: {
+      color: '#f30',
+      fillColor: '#f30',
+      fillOpacity: 0.7,
+      weight: 2,
+      opacity: 0.9,
+      radius: 5
+  }
+}).addTo(map);
+
+var bldgsLayer = L.mapbox.tileLayer('grafa.c3502fe4').addTo(map);
+var labelsLayer = L.mapbox.tileLayer('grafa.d8194008').addTo(map);
+
+
+// Create a Foursquare developer account:
+// https://developer.foursquare.com/
+// AND CHANGE THESE VALUES TO YOUR OWN:
+// otherwise they can be cycled or deactivated with zero notice.
+var CLIENT_ID = 'IKKT15OLUURMKQIIT0XPA1W2AUFBEUFL44NUAIRA31IONXWC';
+var CLIENT_SECRET = '15B0I2GMNNWM0KYWIBMLBKA2HND3RQEBHRXPGKSAFOQQZTJH';
+
+// https://developer.foursquare.com/start/search
+// or use category tree to find venue category IDs https://developer.foursquare.com/categorytree
+var coffee = '4bf58dd8d48988d1e0931735',
+    breakfast = '4bf58dd8d48988d143941735',
+    cafe = '4bf58dd8d48988d16d941735',
+    bar = '4d4b7105d754a06376d81259';
+
+var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
+  '?client_id=CLIENT_ID' +
+  '&client_secret=CLIENT_SECRET' +
+  '&v=20140315' +
+  '&ll=LATLON' +
+  '&categoryId=' + coffee + ',' + breakfast +',' + cafe +',' + bar +
+  '&limit=50' + // 50 is the limit :(
+  '&radius=1000' +
+  '&callback=?';
+
+// Keep our place markers organized in a nice group.
+var foursquarePlaces = L.layerGroup().addTo(map);
+
+
+// Once we've got a position, zoom and center the map
+// on it, and add a single marker.
+map.on('locationfound', function(e) {
+    map.fitBounds(e.bounds);
+    map.setZoom(17);
+
+    // Use jQuery to make an AJAX request to Foursquare to load markers
+// data.
+  $.getJSON(API_ENDPOINT
+    .replace('CLIENT_ID', CLIENT_ID)
+    .replace('CLIENT_SECRET', CLIENT_SECRET)
+    .replace('LATLON', map.getCenter().lat +
+        ',' + map.getCenter().lng), function(result, status) {
+
+    if (status !== 'success') return alert('Request to Foursquare failed');
+
+    // Transform each venue result into a marker on the map.
+    for (var i = 0; i < result.response.venues.length; i++) {
+
+      var beerIcon = L.divIcon({
+        // specify a class name that we can refer to in styles, as we
+          // do above.
+          className: 'fa-beer',
+          // html here defines what goes in the div created for each marker
+          html: '<i class="fa fa-beer fa-3x"></i>',
+          // and the marker width and height
+          // iconSize: [30, 30],
+          iconAnchor: [20,52]
+      }),
+      cafeIcon = L.divIcon({
+        // specify a class name that we can refer to in styles, as we
+          // do above.
+          className: 'fa-cafe',
+          // html here defines what goes in the div created for each marker
+          html: '<i class="fa fa-coffee fa-3x"></i>',
+          iconAnchor: [24,32]
+      });
+      
+      var venue = result.response.venues[i];
+      var latlng = L.latLng(venue.location.lat, venue.location.lng);
+      var marker = L.marker(latlng)
+        .bindLabel(L.mapbox.sanitize('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
+            venue.name + '</a></h2>'), {
+              noHide: true
+          });
+      if (venue.categories[0].id === '4bf58dd8d48988d143941735' || venue.categories[0].id === '4bf58dd8d48988d1e0931735') { // if the category is 'breakfast' or 'cafe'
+        marker.setIcon(cafeIcon);
+      } else {
+        marker.setIcon(beerIcon); // (category: nightlife)
+      };
+      
+      marker.addTo(foursquarePlaces);
+    }
+  });
+});
+
+// Credit Foursquare for their wonderful data
+map.attributionControl
+    .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>');
+
+</script>
+</body>
+</html>
