@@ -7,45 +7,37 @@
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+
 <style>
   body { margin:0; padding:0;}
   #map { position:absolute; top:0; bottom:0; width:100%; background: #ddd;}
-  /*UI Buton*/
-  .ui-button {
-    background:#3887BE;
-    color:#FFF;
-    display:block;
-    position:absolute;
-    top:50%;left:50%;
-    width:160px;
-    margin:-20px 0 0 -80px;
-    z-index:100;
-    text-align:center;
-    padding:10px;
-    border:1px solid rgba(0,0,0,0.4);
-    border-radius:3px;
-  }
-  .ui-button:hover {
-    background:#3074a4;
-    color:#fff;
-  }
+  
   /* icons */
   .fa-yellow {color: #00ff2e; text-shadow: 0 0 8px #fff;}
   .fa-brown {color: #00fffa; text-shadow: 0 0 8px #fff;}
   .fa-here {color: #f30; text-shadow: 0 0 10px #fff; z-index: 9;}
-
+  /* leaflet locate */
+  .leaflet-control-locate {
+    border:1px solid rgba(0,0,0,0.4);
+  }
+  .leaflet-control-locate a {
+    background-color:#fff;
+    background-position:-3px, -2px;
+  }
+  .leaflet-control-locate.active a {
+    background-position:-33px -2px;
+  }
 </style>
 </head>
 <body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <div id='map'></div>
-<a href='#' id='geolocate' class='ui-button'>Find me</a>
 
 <script>
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
-var geolocate = document.getElementById('geolocate');
-
 
 var southWest = L.latLng(45.487335,-122.771187),
     northEast = L.latLng(45.572236,-122.552147),
@@ -60,26 +52,10 @@ var map = L.mapbox.map('map', 'grafa.j9jci4aj', {
     .setView([45.5221047, -122.6610660], 17)
     .setMaxBounds(bounds);
 
+L.control.locate().addTo(map);
+
 var myLocation = L.mapbox.featureLayer().addTo(map);
 // var bldgLayer = L.mapbox.tileLayer('grafa.c3502fe4').addTo(map);
-
-
-// This uses the HTML5 geolocation API, which is available on
-// most mobile browsers and modern browsers, but not in Internet Explorer
-//
-// See this chart of compatibility for details:
-// http://caniuse.com/#feat=geolocation
-if (!navigator.geolocation) {
-    geolocate.innerHTML = 'Geolocation is not available';
-} else {
-    geolocate.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        map.locate();
-    };
-}
-
-
 
 // Create a Foursquare developer account:
 // https://developer.foursquare.com/
@@ -180,15 +156,6 @@ map.on('locationfound', function(e) {
       marker.addTo(foursquarePlaces);
     }
   });
-
-    // And hide the geolocation button
-    geolocate.parentNode.removeChild(geolocate);
-});
-
-// If the user chooses not to allow their location
-// to be shared, display an error message.
-map.on('locationerror', function() {
-    geolocate.innerHTML = 'Position could not be found';
 });
 
 // Credit Foursquare for their wonderful data
