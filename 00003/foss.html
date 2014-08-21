@@ -10,14 +10,17 @@
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
 
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
+
 <style>
   body { margin:0; padding:0;}
   #map { position:absolute; top:0; bottom:0; width:100%; background: #ddd;}
   
   /* icons */
-  .fa-yellow {color: #00ff2e; text-shadow: 0 0 8px #fff;}
-  .fa-brown {color: #00fffa; text-shadow: 0 0 8px #fff;}
-  .fa-here {color: #f30; text-shadow: 0 0 10px #fff; z-index: 9;}
+  .fa-beer {color: #7c7136; text-shadow: 2px 2px 4px #000000;} /*text-shadow: 0 0 8px #333;*/
+  .fa-cafe {color: #fff; text-shadow: 0 0 8px #333;}
+  
   /* leaflet locate */
   .leaflet-control-locate {
     border:1px solid rgba(0,0,0,0.4);
@@ -44,7 +47,7 @@ var southWest = L.latLng(45.487335,-122.771187),
     bounds = L.latLngBounds(southWest, northEast);
 
 // grafa.j9jci4aj
-var map = L.mapbox.map('map', 'grafa.j9jci4aj', {
+var map = L.mapbox.map('map', 'grafa.ja0500g1', {
         infoControl: false,
         attributionControl: true,
         minZoom:14
@@ -52,10 +55,28 @@ var map = L.mapbox.map('map', 'grafa.j9jci4aj', {
     .setView([45.5221047, -122.6610660], 17)
     .setMaxBounds(bounds);
 
-L.control.locate().addTo(map);
+L.control.locate({
+  circleStyle: {
+    color: '#f30',
+            fillColor: '#f30',
+            fillOpacity: 0.3,
+            weight: 2,
+            opacity: 0.6
+  },
+  // inner marker
+  markerStyle: {
+      color: '#f30',
+      fillColor: '#f30',
+      fillOpacity: 0.7,
+      weight: 2,
+      opacity: 0.9,
+      radius: 5
+  }
+}).addTo(map);
 
-var myLocation = L.mapbox.featureLayer().addTo(map);
-// var bldgLayer = L.mapbox.tileLayer('grafa.c3502fe4').addTo(map);
+var bldgsLayer = L.mapbox.tileLayer('grafa.c3502fe4').addTo(map);
+var labelsLayer = L.mapbox.tileLayer('grafa.d8194008').addTo(map);
+
 
 // Create a Foursquare developer account:
 // https://developer.foursquare.com/
@@ -89,25 +110,7 @@ var foursquarePlaces = L.layerGroup().addTo(map);
 // on it, and add a single marker.
 map.on('locationfound', function(e) {
     map.fitBounds(e.bounds);
-    // map.setZoom(16);
-
-    var hereIcon = L.divIcon({className: 'fa-here',html: '<i class="fa fa-arrow-circle-down fa-5x"></i>',iconAnchor: [14,14],});
-
-    // Set a custom icon on each marker based on feature properties.
-    myLocation.on('layeradd', function(e) {
-        var marker = e.layer,
-            feature = marker.feature;
-        marker.setIcon(hereIcon);
-    });
-
-    myLocation.setGeoJSON({
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [e.latlng.lng, e.latlng.lat]
-        },
-        properties: { }
-    });
+    map.setZoom(17);
 
     // Use jQuery to make an AJAX request to Foursquare to load markers
 // data.
@@ -125,34 +128,35 @@ map.on('locationfound', function(e) {
       var beerIcon = L.divIcon({
         // specify a class name that we can refer to in styles, as we
           // do above.
-          className: 'fa-yellow',
+          className: 'fa-beer',
           // html here defines what goes in the div created for each marker
           html: '<i class="fa fa-beer fa-3x"></i>',
           // and the marker width and height
           // iconSize: [30, 30],
-          iconAnchor: [14,14],
-          popupAnchor: [6,-13]
+          iconAnchor: [20,52]
       }),
       cafeIcon = L.divIcon({
         // specify a class name that we can refer to in styles, as we
           // do above.
-          className: 'fa-brown',
+          className: 'fa-cafe',
           // html here defines what goes in the div created for each marker
           html: '<i class="fa fa-coffee fa-3x"></i>',
-          iconAnchor: [14,14],
-          popupAnchor: [2,-13]
+          iconAnchor: [24,32]
       });
       
       var venue = result.response.venues[i];
       var latlng = L.latLng(venue.location.lat, venue.location.lng);
       var marker = L.marker(latlng)
-        .bindPopup('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
-            venue.name + '</a></h2>');
+        .bindLabel(L.mapbox.sanitize('<h2><a href="https://foursquare.com/v/' + venue.id + '">' +
+            venue.name + '</a></h2>'), {
+              noHide: true
+          });
       if (venue.categories[0].id === '4bf58dd8d48988d143941735' || venue.categories[0].id === '4bf58dd8d48988d1e0931735') { // if the category is 'breakfast' or 'cafe'
         marker.setIcon(cafeIcon);
       } else {
         marker.setIcon(beerIcon); // (category: nightlife)
       };
+      
       marker.addTo(foursquarePlaces);
     }
   });
