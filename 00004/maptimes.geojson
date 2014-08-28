@@ -357,6 +357,21 @@
           52.52154811647113
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeBoulder",
+        "twitter": "MaptimeBoulder",
+        "contact": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.2764892578125,
+          40.02603705467395
+        ]
+      }
     }
   ]
 }
