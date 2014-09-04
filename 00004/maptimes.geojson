@@ -376,6 +376,21 @@
     {
       "type": "Feature",
       "properties": {
+        "title": "MaptimeAmes",
+        "twitter": "MaptimeAmes",
+        "contact": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.614923,
+          42.024790
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "title": "MaptimeSD",
         "twitter": "maptimesd",
         "contact": "Jinlong Yang | @jinlongyang"
