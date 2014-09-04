@@ -372,6 +372,21 @@
           40.02603705467395
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeSD",
+        "twitter": "maptimesd",
+        "contact": "Jinlong Yang | @jinlongyang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.16442584991455,
+          32.71346367807085
+        ]
+      }
     }
   ]
 }
