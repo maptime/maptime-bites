@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeSF",
-        "twitter": "maptimesf",
+        "twitter": "@maptimesf",
         "contact": "Beth Schechter | @bethschechter Alan McConchie | @mappingmashups Camille Teicheira | @fulgenteft"
       },
       "geometry": {
@@ -20,8 +20,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimePDX",
-        "twitter": "maptimepdx",
-        "contact": "Lyzi Diamond (PDX) | @lyzidiamond Rafa Gutierrez (PDX) | @geografa Matt Sayler (PDX) | @MattSayler"
+        "twitter": "@MaptimePDX",
+        "contact": "Rafa Gutierrez | @geografa Matt Sayler | @MattSayler"
       },
       "geometry": {
         "type": "Point",
@@ -34,38 +34,8 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeStJohns",
-        "twitter": "MaptimeStJohns",
-        "contact": "Lynnae Sutton (StJohns) | @naefish"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.75466442108154,
-          45.59037762382364
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "MaptimeATL",
-        "twitter": "MaptimeATL",
-        "contact": "Landon Reed | @eltiar"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -84.384744,
-          33.755152
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "title": "MaptimeNYC",
-        "twitter": "MaptimeNYC",
+        "twitter": "@MaptimeNYC",
         "contact": "Alyssa Wright | @alyssapwright Chris Henrick | @chrislhenrick Eric Brelsford | @ebrelsford Jeff Ferzoco | @zingbot Jeremy Goldsmith | @JWGoldsmith"
       },
       "geometry": {
@@ -79,8 +49,8 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeCleveland",
-        "twitter": "OpenGeoCLE",
+        "title": "OpenGeoCleveland",
+        "twitter": "@OpenGeoCLE",
         "contact": "Will Skora | @skorasaurus Stephen Mather | @smathermather"
       },
       "geometry": {
@@ -95,7 +65,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeOAK",
-        "twitter": "MaptimeOAK",
+        "twitter": "@MaptimeOAK",
         "contact": "Lyzi Diamond | @lyzidiamond"
       },
       "geometry": {
@@ -110,7 +80,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeME",
-        "twitter": "MaptimeME",
+        "twitter": "@MaptimeME",
         "contact": "Jacques Tardie | @jqtrde"
       },
       "geometry": {
@@ -125,7 +95,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeDC",
-        "twitter": "MaptimeDC"
+        "twitter": "@MaptimeDC",
+        "contact": "Bonnie Bogle | @bonnie Rosemary Wardley | @RosemaryDaly Brian DeRocher | @openbrian Andrew Wiseman | @wisemana Stephanie Nguyen | @nguyenist"
       },
       "geometry": {
         "type": "Point",
@@ -139,7 +110,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeATX",
-        "twitter": "MaptimeATX",
+        "twitter": "@MaptimeATX",
         "contact": "James Seppi | @hydrologee"
       },
       "geometry": {
@@ -154,8 +125,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeTO",
-        "contact": "Courtney Claessens | @sidewalkballet Tristen Brown | @fallsemo",
-        "twitter": "MaptimeTO"
+        "contact": "Tristen Brown | @fallsemo",
+        "twitter": "@MaptimeTO"
       },
       "geometry": {
         "type": "Point",
@@ -168,8 +139,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeChicago",
-        "contact": "Dan Swick | @DanSwick Ian Dees @iandees | Nick Doiron @mapmeld"
+        "title": "MaptimeCHI",
+        "contact": "Dan Swick | @DanSwick Ian Dees @iandees | Nick Doiron @mapmeld",
+        "twitter": "@MaptimeCHI"
       },
       "geometry": {
         "type": "Point",
@@ -183,8 +155,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeSLC",
-        "twitter": "MaptimeSLC",
-        "contact": "Martijn van Exel @mvexel"
+        "twitter": "@MaptimeSLC",
+        "contact": "Martijn van Exel |@mvexel "
       },
       "geometry": {
         "type": "Point",
@@ -198,7 +170,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeNullIsland",
-        "twitter": "MaptimeNull"
+        "twitter": "@MaptimeNull"
       },
       "geometry": {
         "type": "Point",
@@ -212,7 +184,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeCHA",
-        "twitter": "maptimeCHA",
+        "twitter": "@maptimeCHA",
         "contact": "Jason Denizac | @_jden"
       },
       "geometry": {
@@ -227,7 +199,7 @@
       "type": "Feature",
       "properties": {
         "title": "Maptime WindsorEssex",
-        "twitter": "maptimeWindsor",
+        "twitter": "@maptimeWindsor",
         "contact": "Mita Williams | @copystar"
       },
       "geometry": {
@@ -242,7 +214,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeBoston",
-        "twitter": "maptimeBoston",
+        "twitter": "@maptimeBoston",
         "contact": "Jake Wasserman | @jwass2000 Andy Woodruff | @awoodruff Mike Foster | @mjfoster83"
       },
       "geometry": {
@@ -256,9 +228,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "maptimelex",
-        "twitter": "maptimelex",
-        "contact": "Jessi Breen @jessibreen"
+        "title": "MaptimeLEX (Coming Soon!)",
+        "twitter": "@MaptimeLEX",
+        "contact": "Jessi Breen | @jessibreen Ryan Cooper | @rmcooper4"
       },
       "geometry": {
         "type": "Point",
@@ -272,8 +244,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeHRVA",
-        "twitter": "maptimehrva",
-        "contact": "Jonah Adkins || @jonahadkins"
+        "twitter": "@MaptimeHRVA",
+        "contact": "Jonah Adkins | @jonahadkins"
       },
       "geometry": {
         "type": "Point",
@@ -287,8 +259,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeLA",
-        "twitter": "MAPTIMELA",
-        "contact": "MAPTIMELA"
+        "twitter": "@MAPTIMELA",
+        "contact": "Jonathan Schaeffer | @moderndisease John Wiseman | @lemonodor Machiko Yasuda | @machikoyasuda"
       },
       "geometry": {
         "type": "Point",
@@ -302,8 +274,8 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeVancouver",
-        "twitter": "MaptimeVAN",
-        "contact": "MaptimeVAN"
+        "twitter": "@MaptimeVAN",
+        "contact": "Cecily Walker | @skeskali"
       },
       "geometry": {
         "type": "Point",
@@ -316,24 +288,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeSTL",
-        "twitter": "maptimestl",
-        "contact": "maptimestl"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -90.1980972290039,
-          38.633097794118086
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "title": "MaptimePHL",
-        "twitter": "MaptimePHL",
-        "contact": "MaptimePHL"
+        "twitter": "@MaptimePHL",
+        "contact": "Patrick Hammons | @hamhandedly"
       },
       "geometry": {
         "type": "Point",
@@ -347,7 +304,7 @@
       "type": "Feature",
       "properties": {
         "title": "MaptimeBER",
-        "twitter": "MaptimeBER",
+        "twitter": "@MaptimeBER",
         "contact": "MaptimeBER"
       },
       "geometry": {
@@ -361,9 +318,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeBoulder",
-        "twitter": "MaptimeBoulder",
-        "contact": ""
+        "title": "MaptimeBoulder (Coming Soon!)",
+        "twitter": "@MaptimeBoulder",
+        "contact": "Rachel Stevenson | @UUDreams"
       },
       "geometry": {
         "type": "Point",
@@ -376,30 +333,45 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeAmes",
-        "twitter": "MaptimeAmes",
-        "contact": ""
+        "title": "MaptimeAmes (Coming Soon!)",
+        "twitter": "@MaptimeAmes",
+        "contact": "Nitin Gadia | @nittyjee"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
           -93.614923,
-          42.024790
+          42.02479
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "title": "MaptimeSD",
-        "twitter": "maptimesd",
-        "contact": "Jinlong Yang | @jinlongyang"
+        "title": "MaptimeCVO (Coming Soon!)",
+        "twitter": "@MaptimeCVO",
+        "contact": "Nick Martinelli | @nichom"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.16442584991455,
-          32.71346367807085
+          -123.26316833496092,
+          44.564300344922714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimePR",
+        "twitter": "@MaptimePR",
+        "contact": "Imanol Aranzadi | @iaranzadi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.07589721679688,
+          18.445741249840804
         ]
       }
     }
