@@ -374,6 +374,21 @@
           18.445741249840804
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "MaptimeBend",
+        "twitter": "@MaptimeBend",
+        "contact": "Blair Deaver | @bcd_mtb"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.31103515625,
+          44.05798552253712
+        ]
+      }
     }
   ]
 }
