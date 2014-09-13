@@ -54,7 +54,7 @@ featureLayer.on('ready', function(e) {
     e.target.eachLayer(function(marker) {
         clusterGroup.addLayer(marker);
         var popupContent = '<h2>'+ marker.feature.properties.title +'</h2>' +
-          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '" target="_blank">@' + marker.feature.properties.twitter +'</a>';
+          'Twitter: ' + '<a href="http://twitter.com/' + marker.feature.properties.twitter + '" target="_blank">' + marker.feature.properties.twitter +'</a>';
         // and bind it to the marker
         marker.bindPopup(popupContent);
         marker.setIcon(new L.Icon({
