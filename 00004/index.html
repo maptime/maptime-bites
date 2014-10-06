@@ -45,7 +45,7 @@ var featureLayer = L.mapbox.featureLayer();
 
 map.setView([42.29,-98.78], 2);
 
-featureLayer.loadURL('maptimes.geojson');
+featureLayer.loadURL('https://raw.githubusercontent.com/maptime/maptime.github.io/master/_data/chapters.json');
 
 featureLayer.on('ready', function(e) {
     // The clusterGroup gets each marker in the group added to it
