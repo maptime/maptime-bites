@@ -3,11 +3,8 @@
 <head>
 <meta charset=utf-8 />
 <title></title>
-  <script src='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
-  <!--[if lte IE 8]>
-    <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.ie.css' rel='stylesheet'>
-  <![endif]-->
+  <script src='//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
   <style>
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -16,7 +13,8 @@
 <body>
 <div id='map'></div>
 <script type='text/javascript'>
-var map = L.mapbox.map('map', 'grafa.bfs6pqfr', {legendControl: false})
+L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
+var map = L.mapbox.map('map', 'grafa.95b61b1c', {legendControl: false})
     .setView([45.52245801087795, -122.67773866653444], 13);
 
 // Adding credits
@@ -34,4 +32,5 @@ var myGridControl = L.mapbox.gridControl(myGridLayer).addTo(map);
 
 </script>
 </body>
+
 </html>
